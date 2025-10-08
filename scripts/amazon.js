@@ -1,3 +1,6 @@
+ import { cart } from "../data/cart.js";
+ import { products } from "../data/products.js";
+
 let productsHTML = "";
 products.forEach((product) => {
   productsHTML += `<div class="product-container">
@@ -22,7 +25,7 @@ products.forEach((product) => {
             $${(product.priceCents / 100).toFixed(2)}
           </div>
           <div class="product-quantity-container">
-            <select>
+            <select class="js-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -36,7 +39,7 @@ products.forEach((product) => {
             </select>
           </div>
           <div class="product-spacer"></div>
-          <div class="added-to-cart">
+          <div class="added-to-cart  js-add-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -48,6 +51,7 @@ products.forEach((product) => {
         </div>`;
 });
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
@@ -57,16 +61,32 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         matched = item;
       }
     });
-      if (matched) {
-        matched.quantity+=1;
-      } else {
-        cart.push({
-          productId: productId,
-          quantity: 1,
-        });
-      }
-    console.log(cart);
+    const value = Number(
+      document.querySelector(`.js-selector-${productId}`).value
+    );
+
+    if (matched) {
+      matched.quantity += value;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: value || 1,
+      });
+    }
+
+    let cartQuantity = 0;
+    cart.forEach((item) => {
+      cartQuantity += item.quantity;
+    });
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+    document.querySelector(`.js-selector-${productId}`).value = "1";
+
+    let element = document.querySelector(`.js-add-to-cart-${productId}`);
+
+    setTimeout(() => {
+      element.classList.remove("add-to-cart-visible");
+    }, 2000);
+    element.classList.add("add-to-cart-visible");
+
   });
 });
-
-
