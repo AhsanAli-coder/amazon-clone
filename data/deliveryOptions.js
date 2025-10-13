@@ -10,7 +10,7 @@ export const deliveryOptions=[
     priceCents:499
   },
   {
-    id:'3',
+    id:'2',
     deliveryDays:1,
     priceCents:999
   }
