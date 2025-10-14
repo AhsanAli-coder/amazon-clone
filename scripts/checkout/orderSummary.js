@@ -12,6 +12,8 @@ import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { paymentSummary } from "./paymentSummary.js";
 
  export function renderOrderSummary() {
+
+  
   let checkoutHtml = "";
 
   cart.forEach((cartItem) => {
