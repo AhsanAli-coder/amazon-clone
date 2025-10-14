@@ -73,14 +73,11 @@ function addToCartButton(productId) {
 
 function updateCartQuantity(productId) {
   let cartQuantity = 0;
-
   cart.forEach((cartItem) => {
     cartQuantity += cartItem.quantity;
   });
-
   // Always update the total quantity
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
   // Only run this part if productId is provided
   if (productId !== undefined) {
     const inputElement = document.querySelector(`.js-selector-${productId}`);
@@ -89,9 +86,6 @@ function updateCartQuantity(productId) {
     }
   }
 }
-
-
-
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;

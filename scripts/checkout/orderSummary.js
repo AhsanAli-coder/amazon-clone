@@ -9,6 +9,7 @@ import { formatCurrency } from "../utils/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { paymentSummary } from "./paymentSummary.js";
 
  export function renderOrderSummary() {
   let checkoutHtml = "";
@@ -129,6 +130,7 @@ import { deliveryOptions } from "../../data/deliveryOptions.js";
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`
       );
+        paymentSummary()
       if (container) container.remove();
 
       const newQuantity = updateCartQuantity();
@@ -203,6 +205,7 @@ import { deliveryOptions } from "../../data/deliveryOptions.js";
 
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary()
+      paymentSummary()
     });
   });
   let q = updateCartQuantity();
