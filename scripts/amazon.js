@@ -53,7 +53,6 @@ products.forEach((product) => {
 });
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
-
 function addToCartButton(productId) {
   let element = document.querySelector(`.js-add-to-cart-${productId}`);
   setTimeout(() => {
